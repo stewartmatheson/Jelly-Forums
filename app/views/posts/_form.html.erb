@@ -6,11 +6,12 @@
   </p>
   <p>
     <%= f.label :body %><br />
-    <%= f.text_field :body %>
+    <%= f.text_area :body %>
   </p>
-  <p>
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
-  </p>
+
+  <% if current_user %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+  <% end %>
+	
   <p><%= f.submit "Submit" %></p>
 <% end %>
