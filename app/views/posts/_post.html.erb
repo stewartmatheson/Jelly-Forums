@@ -1,0 +1,27 @@
+<div class="post">
+  	<div class="post_title"><h3><%= link_to post.title, post %></h3></div>
+  	<div class="post_body">
+		<div class="poster_info"><strong><%= post.owner %></strong></div>
+		<div class="post_content"><%= format_body post %></div>
+  	</div>
+
+	<% if show_replies %>
+		<% post.replies.each do |reply| %>
+			<div class="post_body">
+				<div class="poster_info"><strong><%= reply.owner %></strong></div>
+				<div class="post_content"><%= format_body reply %></div>
+		  	</div>
+		<% end %>
+	<% end %>
+	
+	<div class="post_footer">
+		<% if !show_replies %>
+			Replies <%= post.replies.count %> 
+		<% end %>
+			
+		<% if owner post %>
+			<%= link_to "Destroy", post, :confirm => 'Are you sure?', :method => :delete %>
+			<%= link_to "Edit", edit_post_path(post) %>
+		<% end %>
+	</div>
+</div>
