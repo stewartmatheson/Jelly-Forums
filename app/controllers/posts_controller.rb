@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
+    @posts = Post.find(:all, :conditions => "topic_id IS NULL")
   end
   
   def show

@@ -1,15 +1,11 @@
 namespace :db do
   desc "Repopulate database."
   task :populate => :environment do
-    require 'populator'
-    require 'faker'
-    
     [Post].each(&:delete_all)
-    
-    Post.populate 20 do |post|
-      post.title = Populator.words(1..4).titleize
-      post.body =  Populator.sentences(5..500)
+    rand(10).times do
+      replies = Array.new
+      rand(50).times { replies << Factory(:reply) }
+      Factory(:post, :replies => replies)
     end
-    
   end
 end
